@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+	<head>
+		<title>Know Your Schedule</title>
+		<meta name="viewport" content="width=500">
+		<link rel = "icon" type = "image/png" href = "{% static "images/icons/logo.png" %}">
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+		
+
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static "vendor/bootstrap/css/bootstrap.min.css" %}">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static "fonts/font-awesome-4.7.0/css/font-awesome.min.css" %}">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static "vendor/animate/animate.css" %}">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static "vendor/select2/select2.min.css" %}">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static "vendor/perfect-scrollbar/perfect-scrollbar.css" %}">
+		<!--===============================================================================================-->
+		<link rel="stylesheet" type="text/css" href="{% static "css/util.css" %}">
+		<link rel="stylesheet" type="text/css" href="{% static "css/main.css" %}">
+	</head>
+	<style >
+		th
+		{
+			width:500px;
+		}
+	
+	</style>
+	<body id="grad1">
+		<h5>&nbsp;</h5>
+		<h4>&nbsp;Last Updated On 5/Feb/2020</h4>
+		{% if request.GET.identity %}
+			{% if datas %}
+				<p></p>
+				<br>
+				<h1 style="text-align:center;margin-bottom: -3%;"><b>Midsem Schedule</b></h1>;
+				<br>
+				
+				<div class="limiter">
+					<div class="container-table100">
+						<div class="wrap-table100">
+							<div class="table100 ver1 m-b-110">
+								<div class="table100-head">
+									<table>
+										<thead>
+											<tr class="row100 head">
+												<th class="cell100 column2">&nbsp;&nbsp;Course No.</th>
+												<th class="cell100 column1">Subject</th>
+												<th class="cell100 column3">Midsem Date</th>
+												<th class="cell100 column4">Midsem Time</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div class="table100-body js-pscroll">
+									<table>
+										
+										<script>
+														var data = [];
+										</script>
+										<tbody >
+											{% for post in datas %}
+												{% for ref in refdata %}
+													{% if post.Course_ID == ref.cid%}
+														
+														<script>
+															data.push({
+																courseno: "{{ref.courseno}}",
+																title: "{{ref.title}}",
+																md: "{{ref.md}}",
+																mt: "{{ref.mt}}"
+															});
+														</script>
+														
+													{% endif %}
+												{% endfor %}
+												
+												
+											{% endfor %}
+											<script>
+												data.sort((a, b) => new Date(a.md) - new Date(b.md) > 0 ? 1 : -1);
+												for(let i=0;i<data.length;i++) {
+													document.write(
+											`
+											<tr class="row100 body">
+																	<td class="cell100 column2">&nbsp;&nbsp;<b>${data[i].courseno}</b></td>
+																	<td class="cell100 column1"><b>${data[i].title}</b></td>
+																	<td class="cell100 column3"><b>${data[i].md}</b></td>
+																	<td class="cell100 column4"><b>${data[i].mt}</b></td>
+																	
+											</tr>
+											`
+											)
+											}
+											</script>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<h1 style="text-align:center; margin-bottom: -3%;"  ><b>Compre Schedule</b></h1>;
+				<div class="limiter" >
+					<div class="container-table100" >
+						<div class="wrap-table100">
+							<div class="table100 ver1 m-b-110">
+								<div class="table100-head">
+									<table>
+										<thead>
+											<tr class="row100 head">
+												<th class="cell100 column2">&nbsp;&nbsp;Course No.</th>
+												<th class="cell100 column1">Subject</th>
+												<th class="cell100 column3">Compre Date</th>
+												<th class="cell100 column4">Compre Time</th>
+											</tr>
+										</thead>
+									</table>
+								</div>
+								<div class="table100-body js-pscroll">
+									<table>
+										
+										<script>
+														var data = [];
+										</script>
+										<tbody >
+											{% for post in datas %}
+												{% for ref in refdata %}
+													{% if post.Course_ID == ref.cid%}
+														
+														<script>
+															data.push({
+																courseno: "{{ref.courseno}}",
+																title: "{{ref.title}}",
+																cd: "{{ref.cd}}",
+																ct: "{{ref.ct}}"
+															});
+														</script>
+														
+													{% endif %}
+												{% endfor %}
+												
+												
+											{% endfor %}
+											<script>
+												data.sort((a, b) => new Date(a.cd) - new Date(b.cd) > 0 ? 1 : -1);
+												for(let i=0;i<data.length;i++) {
+													document.write(
+											`
+											<tr class="row100 body">
+																	<td class="cell100 column2">&nbsp;&nbsp;<b>${data[i].courseno}</b></td>
+																	<td class="cell100 column1"><b>${data[i].title}</b></td>
+																	<td class="cell100 column3"><b>${data[i].cd}</b></td>
+																	<td class="cell100 column4"><b>${data[i].ct}</b></td>
+																	
+											</tr>
+											`
+											)
+											}
+											</script>
+										</tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="text-muted" style="text-align:center;"><p >†Disclaimer:Examination Dates are Subject to Change<br>The Data has been taken from the FTP; We are not responsible for any errors</p></div>
+				<div class="text-muted" style="text-align:center; "><p ><a style="color:grey;" href="https://docs.google.com/forms/d/e/1FAIpQLSckwu-sKp8R7IRtBvdFjyBSOrDuckFSeql0RrkL1KZcp-w_VQ/viewform" >‡Click to Report an Issue</a></p><br><br>
+				<div class="text-muted" style="text-align:center;"><p style="color: green; ">Created By:</p></div>
+				<div class="text-muted" style="text-align:center;"><p style="color: green; ">Mudit Agarwal 2017B3A70483G</p></div>
+				<div class="text-muted" style="text-align:center;" ><p style="color: green; ">Sagar Badiyani 2017B3A71006G</p></div><br><br>
+				<p></p>
+				<p></p><br><br><br><br>
+			{% else %}
+				<h1>Invalid ID</h1>
+			{% endif %}
+			
+		{% else %}
+			<br><br><br>
+			<form  class="form-inline" method="get" action = "{% url 'home' %}" 	>
+				<div style="display:block;margin: auto auto ;">
+					<div class="form-group mx-sm-3 mb-2" >
+						<input  class="form-control" style="border: solid black 1.5px !important; " id="inp" name="identity"  placeholder="BITS ID" style="text-transform: uppercase;   text-align:center;" style="display:block;margin: auto auto ;" oninput ="this.value = this.value.toUpperCase()"   value="{{request.GET.identity}}"><br><br>
+						<span>&nbsp;&nbsp;&nbsp;</span>
+						<button style="display:block;margin: auto auto ;" class="btn btn-primary mb-2" id="myBtn" type="submit">Submit</button>
+					</div>
+				</div>
+			</form>
+			<br>
+			<img style="display:block;margin: auto auto ;" src="{% static "exam.jpg" %}">
+			<br><br><br><br>
+			<div class="text-muted" style="text-align:center;"><p >†Disclaimer:Examination Dates are Subject to Change<br>The Data has been taken from the FTP; We are not responsible for any errors</p></div>
+			<div class="text-muted" style="text-align:center; "><p ><a style="color:grey;" href="https://docs.google.com/forms/d/e/1FAIpQLSckwu-sKp8R7IRtBvdFjyBSOrDuckFSeql0RrkL1KZcp-w_VQ/viewform" >‡Click to Report an Issue</a></p>
+			<br><br>
+			<div class="text-muted" style="text-align:center;"><p style="color: green; ">Created By:</p></div>
+			<div class="text-muted" style="text-align:center;"><p style="color: green; ">Mudit Agarwal 2017B3A70483G</p></div>
+			<div class="text-muted" style="text-align:center;"><p style="color: green; ">Sagar Badiyani 2017B3A71006G</p></div>
+			<br><br>
+		</div>
+	{% endif %}
+</body>
+</html>
